@@ -1,6 +1,6 @@
 {
   "name": "node-red-contrib-easy-pid-controller-2",
-  "version": "1.2.2",
+  "version": "1.2.6",
   "description": "A Node-RED node for implementing an easy PID controller",
   "main": "easy-pid.js",
   "scripts": {
@@ -8,17 +8,17 @@
   },
   "node-red": {
     "nodes": {
-      "easy-pid-controller": "easy-pid.js"
+      "easy-pid-controller-2": "easy-pid.js"
     }
   },
-  "author": "Tom)",
+  "author": "Tomel218",
   "license": "GPL-3.0",
   "dependencies": {
-    "simple-pid-controller": "1.0.2"
+    "simple-pid-controller-2": "1.0.6"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/hj91/node-red-contrib-easy-pid-controller.git"
+    "url": "https://github.com/Tomel218/node-red-contrib-easy-pid-controller.git"
   },
   "keywords": [
     "node-red",
@@ -26,8 +26,8 @@
     "controller"
   ],
   "bugs": {
-    "url": "https://github.com/hj91/node-red-contrib-easy-pid-controller/issues"
+    "url": "https://github.com/Tomel218/node-red-contrib-easy-pid-controller/issues"
   },
-  "homepage": "https://github.com/hj91/node-red-contrib-easy-pid-controller#readme"
+  "homepage": "https://github.com/Tomel218/node-red-contrib-easy-pid-controller#readme"
 }
 

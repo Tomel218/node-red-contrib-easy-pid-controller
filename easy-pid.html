@@ -15,8 +15,8 @@ limitations under the License.
 -->
 
 <script type="text/javascript">
-    RED.nodes.registerType('easy-pid-controller', {
-        category: 'Bufferstack.IO Industrial Process Nodes',
+    RED.nodes.registerType('easy-pid-controller-2', {
+        category: 'PID Regulation by Tomel218',
         color: '#a6bbcf',
         defaults: {
             name:        { value: "" },
@@ -34,12 +34,12 @@ limitations under the License.
         outputs: 1,
         icon: "font-awesome/fa-line-chart",
         label: function () {
-            return this.name || "easy-pid-controller";
+            return this.name || "easy-pid-controller-2";
         }
     });
 </script>
 
-<script type="text/x-red" data-template-name="easy-pid-controller">
+<script type="text/x-red" data-template-name="easy-pid-controller-2">
     <div class="form-row">
         <label for="node-input-name"><i class="icon-tag"></i> Name</label>
         <input type="text" id="node-input-name" placeholder="Name">
@@ -94,7 +94,7 @@ limitations under the License.
     </div>
 </script>
 
-<script type="text/x-red" data-help-name="easy-pid-controller">
+<script type="text/x-red" data-help-name="easy-pid-controller-2">
     <p>
       This node provides a PID (Proportional-Integral-Derivative) controller based on the simple-pid-controller library.
     </p>

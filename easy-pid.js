@@ -14,7 +14,7 @@
  * limitations under the License.
  **/
 
-const PIDController = require('simple-pid-controller');
+const PIDController = require('simple-pid-controller-2');
 
 module.exports = function (RED) {
     function EasyPIDControllerNode(config) {
@@ -168,5 +168,5 @@ module.exports = function (RED) {
         });
     }
 
-    RED.nodes.registerType("easy-pid-controller", EasyPIDControllerNode);
+    RED.nodes.registerType("easy-pid-controller-2", EasyPIDControllerNode);
 };
