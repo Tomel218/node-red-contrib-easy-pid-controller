@@ -1,12 +1,14 @@
-## Fork of Easy PID Controller Node for Node-RED
+## Easy PID Controller v2  Node for Node-RED
+This is a fork of https://github.com/hj91/node-red-contrib-easy-pid-controller
 
-The `easy-pid-controller` is a simple-to-use Node-RED node that provides Proportional-Integral-Derivative (PID) control functionalities. This node is designed to integrate easily with various control systems and offers configuration options for `0-10V` and `4-20mA` control signals.
+The `easy-pid-controller-2` is a simple-to-use Node-RED node that provides Proportional-Integral-Derivative (PID) control functionalities. This node is designed to integrate easily with various control systems and offers configuration options for `0-10V` and `4-20mA` control signals.
 
 The Advantage of this Fork is that you can set an Limiter for the integrator. You can set an min and max value of the integrator to limit regulation.
 
 ### Features
 
 - Easy to configure PID parameters: Kp, Ki, Kd.
+- Capability to set max and min values for integrator to avoid integral windup.
 - Setpoint (`SV`) input for desired control level.
 - Process Variable (`PV`) input to feedback the current state.
 - Output values for PID components (P, I, D), final output signal, and mapped value signal.
@@ -21,7 +23,7 @@ npm install node-red-contrib-easy-pid-controller-2
 
 ### Usage
 
-1. Drag and drop the `easy-pid-controller` node into your Node-RED flow.
+1. Drag and drop the `easy-pid-controller-2` node into your Node-RED flow.
 2. Double click on the node to configure its parameters.
 3. Connect it to other nodes to provide `PV` and `SV` inputs and get the output signals.
 4. Deploy and monitor the control signal in real-time.
@@ -39,11 +41,15 @@ The node outputs an object payload containing:
 - `PV`: The current process variable.
 - `SV`: The setpoint.
 - `P`, `I`, `D`: PID component values.
+- `I_Max` ,`I_Min`: integrator max and min value
 - `Output`: The final PID calculated signal.
 - `Value`: The mapped control signal according to the sensor type (`0-10V` or `4-20mA`).
 
 ### Changelog
 
+#### v1.2.7
+
+- **Added**: Limitation for integrator. Now you can set a limit for IMax and Imin to avoid integral windup.
 #### v1.2.1
 
 - **Added**: Node status updates during runtime to display relevant information like current PV, PID activation state, and more.
@@ -74,7 +80,8 @@ GPL-3.0 License. See `LICENSE` file for details.
 
 Visit the `examples/` directory for a sample flow illustrating the usage of the node.
 
-### Author 
+## Author
 
-Harshad Joshi @ Bufferstack.IO Analytics Technology LLP, Pune
+Copyright 2025 Tomel218 
+
 
