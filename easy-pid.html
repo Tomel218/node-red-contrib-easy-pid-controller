@@ -1,0 +1,126 @@
+<!--
+easy-pid.html - Copyright 2025 Tomel218 
+
+Licensed under the GNU General Public License, Version 3.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    https://www.gnu.org/licenses/gpl-3.0.html
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+-->
+
+<script type="text/javascript">
+    RED.nodes.registerType('easy-pid-controller', {
+        category: 'Bufferstack.IO Industrial Process Nodes',
+        color: '#a6bbcf',
+        defaults: {
+            name:        { value: "" },
+            k_p:         { value: 1.0, required: true },
+            k_i:         { value: 0.0, required: true },
+            k_d:         { value: 0.0, required: true },
+            dt:          { value: "1", required: true },
+            i_max:       { value: 0, required: false },
+            i_min:       { value: 0, required: false },
+            sensor_type: { value: "0-10V", required: true },
+            range_min:   { value: 0, required: true },
+            range_max:   { value: 100, required: true }
+        },
+        inputs: 1,
+        outputs: 1,
+        icon: "font-awesome/fa-line-chart",
+        label: function () {
+            return this.name || "easy-pid-controller";
+        }
+    });
+</script>
+
+<script type="text/x-red" data-template-name="easy-pid-controller">
+    <div class="form-row">
+        <label for="node-input-name"><i class="icon-tag"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="Name">
+    </div>
+
+    <div class="form-row">
+        <label for="node-input-k_p">KP</label>
+        <input type="number" id="node-input-k_p" step="0.01">
+    </div>
+
+    <div class="form-row">
+        <label for="node-input-k_i">KI</label>
+        <input type="number" id="node-input-k_i" step="0.01">
+    </div>
+
+    <div class="form-row">
+        <label for="node-input-k_d">KD</label>
+        <input type="number" id="node-input-k_d" step="0.01">
+    </div>
+
+    <div class="form-row">
+        <label for="node-input-dt">dt</label>
+        <input type="number" id="node-input-dt">
+    </div>
+
+    <div class="form-row">
+        <label for="node-input-i_max">IMax</label>
+        <input type="number" id="node-input-i_max" step="1">
+    </div>
+
+    <div class="form-row">
+        <label for="node-input-i_min">IMin</label>
+        <input type="number" id="node-input-i_min" step="1">
+    </div>
+
+    <div class="form-row">
+        <label for="node-input-sensor_type">Sensor Type</label>
+        <select id="node-input-sensor_type">
+            <option value="0-10V">0-10V</option>
+            <option value="4-20mA">4-20mA</option>
+        </select>
+    </div>
+
+    <div class="form-row">
+        <label for="node-input-range_min">Range Min</label>
+        <input type="number" id="node-input-range_min">
+    </div>
+
+    <div class="form-row">
+        <label for="node-input-range_max">Range Max</label>
+        <input type="number" id="node-input-range_max">
+    </div>
+</script>
+
+<script type="text/x-red" data-help-name="easy-pid-controller">
+    <p>
+      This node provides a PID (Proportional-Integral-Derivative) controller based on the simple-pid-controller library.
+    </p>
+    <p>Configuration parameters:</p>
+    <ul>
+      <li><b>KP</b>: Proportional gain – responds proportionally to the current error.</li>
+      <li><b>KI</b>: Integral gain – responds based on the cumulative error over time.</li>
+      <li><b>KD</b>: Derivative gain – responds based on the rate of change of the error.</li>
+      <li><b>dt</b>: Time interval per step (in seconds).</li>
+      <li><b>IMax</b>: Maximum integrator value (must be positive).</li>
+      <li><b>IMin</b>: Minimum integrator value (must be negative).</li>
+      <li><b>Sensor Type</b>: Type of sensor input (0-10V or 4-20mA).</li>
+      <li><b>Range Min</b>: Minimum output range value.</li>
+      <li><b>Range Max</b>: Maximum output range value.</li>
+    </ul>
+    <p>
+      <b>Why limit IMax and IMin?</b><br>
+      The integral part of the controller can accumulate over time, especially in systems where the error persists. This can lead to a phenomenon called "integral wind-up", where the integral term becomes excessively large and causes instability, overshooting, or long settling times.
+      Limiting the integrator with <code>IMax</code> and <code>IMin</code> ensures that the controller remains stable and responsive, even in the presence of sustained error or actuator limits. It helps avoid excessive control output and protects both the system and the process hardware.
+    </p>
+    <p>
+      When an <code>auto</code> message with payload <code>true</code> is received, the node starts a timer that ticks every <code>dt</code> milliseconds.
+      On each tick, the PID controller updates and emits a message with the controller state.
+    </p>
+    <p>
+      A <code>PV</code> message (with numeric payload) can be sent to update the current process value.
+    </p>
+  </script>
+  
