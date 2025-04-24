@@ -46,6 +46,9 @@ The node outputs an object payload containing:
 - `Value`: The mapped control signal according to the sensor type (`0-10V` or `4-20mA`).
 
 ### Changelog
+#### v1.2.8
+
+- **BugFix**: Fixed Value Error "Infinity" by using negative KI Values. 
 
 #### v1.2.7
 
